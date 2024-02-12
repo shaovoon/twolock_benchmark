@@ -23,5 +23,11 @@
     <ClInclude Include="RAIIMutexLock.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="CriticalSection.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RAII2Lock.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

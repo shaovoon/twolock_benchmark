@@ -4,6 +4,7 @@
 #include <string>
 #include <mutex>
 #include "RAIIMutexLock.h"
+#include "RAII2Lock.h"
 
 class timer
 {
@@ -52,7 +53,7 @@ int main()
 	result = 0;
 	for (int i = 0; i < max_loop; ++i)
 	{
-		std::scoped_lock (a, b);
+		std::scoped_lock lock(a, b);
 		result += i;
 	}
 	std::cout << "result:" << result << std::endl;
@@ -63,6 +64,19 @@ int main()
 	for (int i = 0; i < max_loop; ++i)
 	{
 		RAIIMutexLock lock(a, b);
+		result += i;
+	}
+	std::cout << "result:" << result << std::endl;
+	stopwatch.stop();
+
+	CriticalSection csA;
+	CriticalSection csB;
+
+	stopwatch.start("RAII2Lock locking");
+	result = 0;
+	for (int i = 0; i < max_loop; ++i)
+	{
+		RAII2Lock lock(csA, csB);
 		result += i;
 	}
 	std::cout << "result:" << result << std::endl;
