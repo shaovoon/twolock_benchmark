@@ -20,7 +20,7 @@ public:
 		auto end = std::chrono::high_resolution_clock::now();
 		auto dur = end - begin;
 		auto ms = std::chrono::duration_cast<std::chrono::milliseconds>(dur).count();
-		std::cout << std::setw(21) << text << " timing:" << std::setw(5) << ms << "ms" << std::endl;
+		std::cout << std::setw(28) << text << " timing:" << std::setw(5) << ms << "ms" << std::endl;
 	}
 
 private:
@@ -72,7 +72,7 @@ int main()
 	CriticalSection csA;
 	CriticalSection csB;
 
-	stopwatch.start("RAII2Lock locking");
+	stopwatch.start("2 CriticalSection locking");
 	result = 0;
 	for (int i = 0; i < max_loop; ++i)
 	{
