@@ -2,10 +2,10 @@
 #include "CriticalSection.h"
 //#include <iostream>
 
-class RAII2Lock
+class RAII2CSLock
 {
 public:
-	RAII2Lock(CriticalSection& a_section, CriticalSection& b_section)
+	RAII2CSLock(CriticalSection& a_section, CriticalSection& b_section)
 		: m_SectionA(a_section)
 		, m_SectionB(b_section)
 	{
@@ -29,7 +29,7 @@ public:
 			//std::cout << "&m_SectionB == &m_SectionA\n";
 		}
 	}
-	~RAII2Lock()
+	~RAII2CSLock()
 	{
 		if (&m_SectionA == &m_SectionB)
 		{
@@ -45,8 +45,8 @@ public:
 
 private:
 	// copy ops are private to prevent copying
-	RAII2Lock(const RAII2Lock&);
-	RAII2Lock& operator=(const RAII2Lock&);
+	RAII2CSLock(const RAII2CSLock&);
+	RAII2CSLock& operator=(const RAII2CSLock&);
 
 	CriticalSection& m_SectionA;
 	CriticalSection& m_SectionB;

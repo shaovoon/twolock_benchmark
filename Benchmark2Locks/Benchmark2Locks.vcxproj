@@ -161,8 +161,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CriticalSection.h" />
-    <ClInclude Include="RAII2Lock.h" />
-    <ClInclude Include="RAIIMutexLock.h" />
+    <ClInclude Include="RAII2CSLock.h" />
+    <ClInclude Include="RAII2MutexLock.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

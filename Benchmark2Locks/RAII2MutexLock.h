@@ -2,10 +2,10 @@
 #include <mutex>
 //#include <iostream>
 
-class RAIIMutexLock
+class RAII2MutexLock
 {
 public:
-	RAIIMutexLock(std::mutex& a_mut, std::mutex& b_mut)
+	RAII2MutexLock(std::mutex& a_mut, std::mutex& b_mut)
 		: mutA(a_mut)
 		, mutB(b_mut)
 	{
@@ -29,7 +29,7 @@ public:
 			//std::cout << "&mutB == &mutA\n";
 		}
 	}
-	~RAIIMutexLock()
+	~RAII2MutexLock()
 	{
 		if (&mutA == &mutB)
 		{
@@ -45,8 +45,8 @@ public:
 
 private:
 	// copy ops are private to prevent copying
-	RAIIMutexLock(const RAIIMutexLock&);
-	RAIIMutexLock& operator=(const RAIIMutexLock&);
+	RAII2MutexLock(const RAII2MutexLock&);
+	RAII2MutexLock& operator=(const RAII2MutexLock&);
 
 	std::mutex& mutA;
 	std::mutex& mutB;

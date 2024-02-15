@@ -3,8 +3,10 @@
 #include <chrono>
 #include <string>
 #include <mutex>
-#include "RAIIMutexLock.h"
-#include "RAII2Lock.h"
+#include "RAII2MutexLock.h"
+#ifdef _WIN32
+#include "RAII2CSLock.h"
+#endif
 
 class timer
 {
@@ -37,6 +39,8 @@ int main()
 	std::mutex a;
 	std::mutex b;
 
+	std::cout << "Running Benchmark. Please wait...\n\n";
+
 	stopwatch.start("Std Locking");
 	result = 0;
 	for (int i = 0; i < max_loop; ++i)
@@ -46,8 +50,8 @@ int main()
 		std::lock_guard<std::mutex> lkb(b, std::adopt_lock);
 		result += i;
 	}
-	std::cout << "result:" << result << std::endl;
 	stopwatch.stop();
+	std::cout << "result:" << result << std::endl;
 
 	stopwatch.start("scoped_lock locking");
 	result = 0;
@@ -56,31 +60,35 @@ int main()
 		std::scoped_lock lock(a, b);
 		result += i;
 	}
-	std::cout << "result:" << result << std::endl;
 	stopwatch.stop();
+	std::cout << "result:" << result << std::endl;
 
-	stopwatch.start("RAIIMutexLock locking");
+	stopwatch.start("RAII2MutexLock locking");
 	result = 0;
 	for (int i = 0; i < max_loop; ++i)
 	{
-		RAIIMutexLock lock(a, b);
+		RAII2MutexLock lock(a, b);
 		result += i;
 	}
-	std::cout << "result:" << result << std::endl;
 	stopwatch.stop();
+	std::cout << "result:" << result << std::endl;
 
+#ifdef _WIN32
 	CriticalSection csA;
 	CriticalSection csB;
 
-	stopwatch.start("2 CriticalSection locking");
+	stopwatch.start("RAII2CSLock locking");
 	result = 0;
 	for (int i = 0; i < max_loop; ++i)
 	{
-		RAII2Lock lock(csA, csB);
+		RAII2CSLock lock(csA, csB);
 		result += i;
 	}
-	std::cout << "result:" << result << std::endl;
 	stopwatch.stop();
+	std::cout << "result:" << result << std::endl;
+#endif
+
+	std::cout << "\nBenchmark ended. Please ignore result as it is a\nway to prevent optimizing away the for loop" << std::endl;
 
 	return 0;
 }

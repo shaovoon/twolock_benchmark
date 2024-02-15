@@ -20,13 +20,13 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="RAIIMutexLock.h">
+    <ClInclude Include="RAII2MutexLock.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="CriticalSection.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="RAII2Lock.h">
+    <ClInclude Include="RAII2CSLock.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
